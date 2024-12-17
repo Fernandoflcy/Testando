@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Surpresa de aniversário especial com mensagens, galeria e efeitos animados.">
+  <meta name="keywords" content="aniversário, surpresa, amor, galeria, mensagens especiais">
+  <meta name="author" content="Seu Nome">
+  <meta property="og:title" content="Feliz aniversário, amor! 🙂🥰">
+  <meta property="og:description" content="Uma surpresa especial de aniversário com mensagens, galeria e efeitos animados.">
+  <meta property="og:image" content="thumbnail.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://seusite.com/surpresa">
+  <title>Feliz aniversário, amor! 🙂🥰</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js" async></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <!-- Tela de carregamento -->
+  <div id="loading-screen">
+    <p>Carregando Surpresa... 🎁</p>
+  </div>
+
+  <!-- Tela de boas-vindas -->
+  <section id="welcome-screen" class="fade-in">
+    <h1>Olá, <span id="special-name" class="animated-text">Lídia minha Princesa 👸</span>! 🌟</h1>
+    <p class="intro-text">Hoje preparei algo incrível para você. Clique no botão abaixo para começar!😉🥰</p>
+    <button id="start-btn" aria-label="Iniciar a surpresa" class="btn">Começar a Surpresa 🎉</button>
+  </section>
+
+  <!-- Conteúdo da surpresa -->
+  <main>
+    <section id="surprise-content" style="display: none;">
+      <audio id="background-music" loop preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+      </audio>
+
+      <button id="toggle-theme" aria-label="Alternar tema claro ou escuro" class="btn">Alternar Modo 🌙/☀️</button>
+      <h2 id="countdown-timer">Preparando a surpresa...</h2>
+
+      <div id="secret-message" style="display: none;">
+        <h2>✨ Mensagem Especial ✨</h2>
+        <p id="typed-message"></p>
+      </div>
+
+      <div id="photo-gallery" style="display: none;">
+        <h3>Galeria de Momentos</h3>
+        <div class="gallery">
+          <img src="photo1.jpeg" alt="Juntos para sempre 🥺">
+          <img src="photo2.jpeg" alt="Amor da minha Vida🥰">
+          <img src="photo3.jpeg" alt="Linda Princesa">
+          <img src="photo4.jpg" alt="Aniversário passado">
+          <img src="photo5.jpg" alt="Momentos felizes">
+        </div>
+      </div>
+
+      <!-- Balões Flutuantes -->
+      <div id="balloon-container"></div>
+
+      <canvas id="celebration-canvas"></canvas>
+
+      <button id="download-btn" style="display: none;" aria-label="Baixar presente" class="btn">Baixar Presente 🎁</button>
+
+      <div id="response-form" style="display: none;">
+        <h3>Deixe sua Mensagem no WhatsApp, Amor 🙂 💬</h3>
+        <textarea id="response-message" placeholder="Escreva algo especial..." required></textarea>
+        <button id="send-response" aria-label="Enviar mensagem" class="btn">Enviar Mensagem</button>
+        <div id="feedback-message" style="display: none; color: green; font-weight: bold;">
+          Sua mensagem foi enviada com sucesso! 💌
+        </div>
+      </div>
+
+      <script>
+        const body = document.body;
+
+        function toggleTheme() {
+          body.classList.toggle('theme-blue');
+          body.classList.toggle('theme-orange');
+        }
+
+        // Alterna os temas a cada 5 segundos
+        setInterval(toggleTheme, 5000);
+      </script>
+
+      <script>
+        document.getElementById("send-response").addEventListener("click", function() {
+          const phoneNumber = "+244927978477"; // Substitua pelo seu número de WhatsApp (código do país + número)
+          const userMessage = document.getElementById("response-message").value.trim();
+
+          if (userMessage) {
+            const encodedMessage = encodeURIComponent(userMessage);
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+            // Abre o WhatsApp em uma nova aba
+            window.open(whatsappLink, "_blank");
+
+            // Exibe a mensagem de feedback
+            document.getElementById("feedback-message").style.display = "block";
+
+            // Limpa o campo de texto após o envio
+            document.getElementById("response-message").value = "";
+          } else {
+            alert("Por favor, escreva uma mensagem antes de enviar.");
+          }
+        });
+
+        // Adicionar balões flutuantes
+        const balloonContainer = document.getElementById("balloon-container");
+
+        for (let i = 0; i < 10; i++) { // Cria 10 balões
+          const balloon = document.createElement("div");
+          balloon.className = "balloon";
+          balloon.style.left = `${Math.random() * 100}%`; // Posiciona aleatoriamente horizontalmente
+          balloon.style.animationDelay = `${Math.random() * 2}s`; // Adiciona atraso aleatório na animação
+          balloonContainer.appendChild(balloon);
+        }
+      </script>
+
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h2>Sobre Nós</h2>
+        <p>Celebrando momentos especiais e criando memórias inesquecíveis juntos. Obrigado por fazer parte desta jornada!
+        Subordinado pela @ElectroService</p>
+      </div>
+
+      <div class="footer-section social">
+        <h2>Nos Siga</h2>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/fernandoflcy"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.facebook.com/fernandoflcy"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; Fernando Flcy 2024 | Desenvolvido com ❤️ para você
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+
+</body>
+</html>
